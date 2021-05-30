@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { useParams } from "react-router";
 import { UsersPostsContext } from "../../../App";
-import Posts from "../../Posts/Posts";
+import Posts from "../../Post/Posts/Posts";
 import UserDetails from "../UserDetails/UserDetails";
 
 function User() {

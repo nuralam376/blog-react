@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { UsersPostsContext } from "../../App";
+import { UsersPostsContext } from "../../../App";
+import Comments from "../../Comment/Comments/Comments";
 
 function PostDetails() {
   const { id } = useParams();
@@ -20,6 +21,7 @@ function PostDetails() {
     <div>
       <h3 className="mb-4 mt-2">{post.title}</h3>
       <p>{post.body}</p>
+      <Comments postId={post.id} />
     </div>
   );
 }

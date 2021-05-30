@@ -7,7 +7,9 @@ function Header() {
   const [, , userId] = useContext(UsersPostsContext);
   return (
     <Navbar bg="dark" variant="dark">
-      <Navbar.Brand href="/">Blog - React</Navbar.Brand>
+      <Link to="/" className="text-white">
+        Blog - React
+      </Link>
       <Nav className="ml-auto">
         <Link to="/posts" className="nav-link">
           All Posts

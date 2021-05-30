@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
-import { UsersPostsContext } from "../../App";
+import { UsersPostsContext } from "../../../App";
 import Posts from "../Posts/Posts";
 
 function AllPosts() {
