@@ -1,12 +1,18 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function UserDetails({ user }) {
+  const { id, name, email, website } = user;
+
   return (
-    <div>
-      <h1>{user.name}</h1>
-      <h3>{user.email}</h3>
-      <p>{user.website}</p>
-    </div>
+    <>
+      <td>{id}</td>
+      <td>
+        <Link to={`/users/${id}`}>{name}</Link>
+      </td>
+      <td>{email}</td>
+      <td>{website}</td>
+    </>
   );
 }
 

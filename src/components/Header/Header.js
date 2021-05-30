@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { UsersPostsContext } from "../../App";
 
 function Header() {
+  const [, , userId] = useContext(UsersPostsContext);
   return (
     <Navbar bg="dark" variant="dark">
       <Navbar.Brand href="/">Blog - React</Navbar.Brand>
@@ -10,7 +12,7 @@ function Header() {
         <Link to="/posts" className="nav-link">
           All Posts
         </Link>
-        <Link to="/profile" className="nav-link">
+        <Link to={`/users/${userId}`} className="nav-link">
           Profile
         </Link>
         <Link to="/add-post" className="nav-link">

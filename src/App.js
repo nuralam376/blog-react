@@ -10,6 +10,7 @@ import AllPosts from "./components/AllPosts/AllPosts";
 import Header from "./components/Header/Header";
 import PostDetails from "./components/PostDetails/PostDetails";
 import User from "./components/Profile/User/User";
+import Users from "./components/Profile/Users/Users";
 export const UsersPostsContext = createContext();
 
 function App() {
@@ -24,7 +25,8 @@ function App() {
           <Switch>
             <Route exact path="/posts" component={AllPosts} />
             <Route exact path="/posts/:id" component={PostDetails} />
-            <Route exact path="/profile" component={User} />
+            <Route exact path="/users" component={Users} />
+            <Route exact path="/users/:id" component={User} />
           </Switch>
           <Redirect from="/" to="/posts" />
         </Router>
