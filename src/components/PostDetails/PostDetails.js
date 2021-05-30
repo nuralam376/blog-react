@@ -1,14 +1,15 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { UsersPostsContext } from "../../App";
 
 function PostDetails() {
   const { id } = useParams();
+  const [allPosts] = useContext(UsersPostsContext);
   const [post, setPost] = useState({});
 
   const getPost = async () => {
-    const response = await axios.get(`/posts/${id}`);
-    setPost(response.data);
+    const post = allPosts.find((post) => post.id.toString() === id);
+    setPost(post);
   };
 
   useEffect(() => {

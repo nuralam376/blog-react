@@ -1,15 +1,18 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Button, Col, Container, Row } from "react-bootstrap";
-import Post from "../Post/Post";
+import React, { useContext, useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
+import { UsersPostsContext } from "../../App";
+import Posts from "../Posts/Posts";
 
 function AllPosts() {
+  const [allPosts, setAllPosts] = useContext(UsersPostsContext);
   const [posts, setPosts] = useState([]);
   const [numberOfPosts, setNumberOfPosts] = useState(10);
 
   const getAllPosts = async () => {
     const response = await axios.get("/posts");
-    setPosts(response.data.splice(posts.length, numberOfPosts)); // Load the 10 posts only from the last posts length
+    setAllPosts([...response.data]);
+    setPosts(response.data.splice(0, numberOfPosts)); // Load the 10 posts only from the last posts length
   };
 
   useEffect(() => {
@@ -22,17 +25,7 @@ function AllPosts() {
 
   return (
     <div>
-      <h1 className="mb-5 mt-2">All Posts</h1>
-      <Container>
-        <Row>
-          {posts.map((post) => (
-            <Col key={post.id} md="4" className="p-5">
-              <Post post={post} />
-            </Col>
-          ))}
-        </Row>
-      </Container>
-
+      <Posts posts={posts} />
       <Button variant="info" className="mt-2" onClick={loadMorePosts}>
         Load More
       </Button>
