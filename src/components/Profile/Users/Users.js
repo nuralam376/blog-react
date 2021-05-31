@@ -1,23 +1,58 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Table } from "react-bootstrap";
+import { Pagination, Table } from "react-bootstrap";
 import UserDetails from "../UserDetails/UserDetails";
 
 function Users() {
+  const [allUsers, setAllUsers] = useState([]);
   const [users, setUsers] = useState([]);
+  const [active, setActive] = useState(
+    parseInt(localStorage.getItem("active")) || 2
+  );
+  const [userListNumber, setUserListNumber] = useState(2);
 
   const getAllUsers = async () => {
     try {
       const response = await axios.get("/users");
-      setUsers(response.data);
+      setAllUsers(response.data);
     } catch (err) {
       alert("Something went wrong");
     }
   };
 
+  const getUsersPaginationData = () => {
+    const response = allUsers.slice(0, active);
+    setUsers(response);
+  };
+
+  const setPaginationNumber = (number) => {
+    setActive(number);
+    localStorage.setItem("active", number);
+  };
+
+  const renderPagination = () => {
+    let items = [];
+    for (let number = 2; number <= allUsers.length; number += 2) {
+      items.push(
+        <Pagination.Item
+          onClick={() => setPaginationNumber(number)}
+          className={number === active && `active`}
+        >
+          {number}
+        </Pagination.Item>
+      );
+    }
+    return <Pagination>{items}</Pagination>;
+  };
+
   useEffect(() => {
     getAllUsers();
-  });
+  }, []);
+
+  useEffect(() => {
+    getUsersPaginationData();
+  }, [allUsers.length, active]);
+
   return (
     <div>
       <h1>Users</h1>
@@ -33,11 +68,12 @@ function Users() {
         <tbody>
           {users.map((user) => (
             <tr key={user.id}>
-              <UserDetails user={user} />
+              <UserDetails key={user.id} user={user} />
             </tr>
           ))}
         </tbody>
       </Table>
+      {renderPagination()}
     </div>
   );
 }
