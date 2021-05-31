@@ -1,16 +1,15 @@
-import React, { useContext, useEffect, useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { UsersPostsContext } from "../../../App";
 import Comments from "../../Comment/Comments/Comments";
 
 function PostDetails() {
   const { id } = useParams();
-  const [allPosts] = useContext(UsersPostsContext);
   const [post, setPost] = useState({});
 
   const getPost = async () => {
-    const post = allPosts.find((post) => post.id.toString() === id);
-    setPost(post);
+    const response = await axios.get(`/posts/${id}`);
+    setPost(response.data);
   };
 
   useEffect(() => {
@@ -19,8 +18,9 @@ function PostDetails() {
 
   return (
     <div>
-      <h3 className="mb-4 mt-2">{post.title}</h3>
-      <p>{post.body}</p>
+      <h3 className="m-4 text-left">{post.title}</h3>
+      <p className="m-4 text-left">{post.body}</p>
+      <hr />
       <Comments postId={post.id} />
     </div>
   );

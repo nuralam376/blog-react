@@ -1,17 +1,14 @@
 import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
-import { UsersPostsContext } from "../../../App";
 import Posts from "../Posts/Posts";
 
 function AllPosts() {
-  const [allPosts, setAllPosts] = useContext(UsersPostsContext);
   const [posts, setPosts] = useState([]);
   const [numberOfPosts, setNumberOfPosts] = useState(10);
 
   const getAllPosts = async () => {
     const response = await axios.get("/posts");
-    setAllPosts([...response.data]);
     setPosts(response.data.splice(0, numberOfPosts)); // Load the 10 posts only from the last posts length
   };
 

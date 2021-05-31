@@ -14,12 +14,11 @@ import Users from "./components/Profile/Users/Users";
 export const UsersPostsContext = createContext();
 
 function App() {
-  const [allPosts, setAllPosts] = useState([]);
   const [userId, setUserId] = useState(2);
 
   return (
     <div className="App">
-      <UsersPostsContext.Provider value={[allPosts, setAllPosts, userId]}>
+      <UsersPostsContext.Provider value={[userId]}>
         <Router>
           <Header />
           <Switch>

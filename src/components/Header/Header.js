@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { UsersPostsContext } from "../../App";
 
 function Header() {
-  const [, , userId] = useContext(UsersPostsContext);
+  const [userId] = useContext(UsersPostsContext);
   return (
     <Navbar bg="dark" variant="dark">
       <Link to="/" className="text-white">
