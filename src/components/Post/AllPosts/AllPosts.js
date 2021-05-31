@@ -8,8 +8,12 @@ function AllPosts() {
   const [numberOfPosts, setNumberOfPosts] = useState(10);
 
   const getAllPosts = async () => {
-    const response = await axios.get("/posts");
-    setPosts(response.data.splice(0, numberOfPosts)); // Load the 10 posts only from the last posts length
+    try {
+      const response = await axios.get("/posts");
+      setPosts(response.data.splice(0, numberOfPosts)); // Load the 10 posts only from the last posts length
+    } catch (err) {
+      alert("Something went wrong");
+    }
   };
 
   useEffect(() => {

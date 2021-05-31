@@ -7,8 +7,12 @@ function Users() {
   const [users, setUsers] = useState([]);
 
   const getAllUsers = async () => {
-    const response = await axios.get("/users");
-    setUsers(response.data);
+    try {
+      const response = await axios.get("/users");
+      setUsers(response.data);
+    } catch (err) {
+      alert("Something went wrong");
+    }
   };
 
   useEffect(() => {

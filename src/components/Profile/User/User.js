@@ -11,13 +11,21 @@ function User() {
   const { id } = useParams();
 
   const getUser = async () => {
-    const response = await axios.get(`/users/${id}`);
-    setUser(response.data);
+    try {
+      const response = await axios.get(`/users/${id}`);
+      setUser(response.data);
+    } catch (err) {
+      alert("Something went wrong");
+    }
   };
 
   const getUserPosts = async () => {
-    const response = await axios.get(`/users/${id}/posts`);
-    setPosts(response.data);
+    try {
+      const response = await axios.get(`/users/${id}/posts`);
+      setPosts(response.data);
+    } catch (err) {
+      alert("Something went wrong");
+    }
   };
 
   useEffect(() => {

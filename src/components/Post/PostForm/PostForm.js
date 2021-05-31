@@ -19,9 +19,13 @@ function PostForm() {
 
   const onSubmit = async (data, { resetForm }) => {
     data.userId = userId;
-    const response = axios.post("/posts", data);
-    alert("Post Created successfully");
-    resetForm();
+    try {
+      const response = await axios.post("/posts", data);
+      if (response.status === 201) alert("Post Created successfully");
+      resetForm();
+    } catch (err) {
+      alert("Something went wrong");
+    }
   };
 
   return (

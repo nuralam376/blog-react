@@ -19,6 +19,21 @@ function PostDetails() {
     getPost();
   }, [id]);
 
+  const deletePost = async () => {
+    if (post.userId !== userId) {
+      alert("You cannot delete the post");
+      return;
+    }
+    try {
+      const response = await axios.delete(`/posts/${post.id}`);
+      if (response.status === 200) {
+        alert("Post deleted successfully");
+      }
+    } catch (err) {
+      alert("Something went wrong");
+    }
+  };
+
   return (
     <div>
       <h3 className="m-4 text-left">
@@ -28,7 +43,7 @@ function PostDetails() {
             <Button variant="success" className="ml-3">
               Update
             </Button>
-            <Button variant="danger" className="ml-3">
+            <Button variant="danger" className="ml-3" onClick={deletePost}>
               Delete
             </Button>
           </>
