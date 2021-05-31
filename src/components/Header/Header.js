@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { UsersPostsContext } from "../../App";
+import { UserContext } from "../../App";
 
 function Header() {
-  const [userId] = useContext(UsersPostsContext);
+  const [userId] = useContext(UserContext);
   return (
     <Navbar bg="dark" variant="dark">
       <Link to="/" className="text-white">

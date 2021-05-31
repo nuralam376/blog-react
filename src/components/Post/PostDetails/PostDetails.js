@@ -1,11 +1,14 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
 import { useParams } from "react-router";
+import { UserContext } from "../../../App";
 import Comments from "../../Comment/Comments/Comments";
 
 function PostDetails() {
   const { id } = useParams();
   const [post, setPost] = useState({});
+  const [userId] = useContext(UserContext);
 
   const getPost = async () => {
     const response = await axios.get(`/posts/${id}`);
@@ -18,7 +21,19 @@ function PostDetails() {
 
   return (
     <div>
-      <h3 className="m-4 text-left">{post.title}</h3>
+      <h3 className="m-4 text-left">
+        {post.title}
+        {post.userId === userId && (
+          <>
+            <Button variant="success" className="ml-3">
+              Update
+            </Button>
+            <Button variant="danger" className="ml-3">
+              Delete
+            </Button>
+          </>
+        )}
+      </h3>
       <p className="m-4 text-left">{post.body}</p>
       <hr />
       <Comments postId={post.id} />

@@ -11,14 +11,14 @@ import AllPosts from "./components/Post/AllPosts/AllPosts";
 import PostDetails from "./components/Post/PostDetails/PostDetails";
 import User from "./components/Profile/User/User";
 import Users from "./components/Profile/Users/Users";
-export const UsersPostsContext = createContext();
+export const UserContext = createContext();
 
 function App() {
   const [userId, setUserId] = useState(2);
 
   return (
     <div className="App">
-      <UsersPostsContext.Provider value={[userId]}>
+      <UserContext.Provider value={[userId]}>
         <Router>
           <Header />
           <Switch>
@@ -29,7 +29,7 @@ function App() {
             <Redirect from="/" to="/posts" />
           </Switch>
         </Router>
-      </UsersPostsContext.Provider>
+      </UserContext.Provider>
     </div>
   );
 }
