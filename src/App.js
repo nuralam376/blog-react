@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header/Header";
+import AddPost from "./components/Post/AddPost/AddPost";
 import AllPosts from "./components/Post/AllPosts/AllPosts";
 import PostDetails from "./components/Post/PostDetails/PostDetails";
 import User from "./components/Profile/User/User";
@@ -26,6 +27,7 @@ function App() {
             <Route exact path="/posts/:id" component={PostDetails} />
             <Route exact path="/users" component={Users} />
             <Route exact path="/users/:id" component={User} />
+            <Route exact path="/add-post" component={AddPost} />
             <Redirect from="/" to="/posts" />
           </Switch>
         </Router>
