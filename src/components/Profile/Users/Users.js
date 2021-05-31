@@ -9,7 +9,6 @@ function Users() {
   const [active, setActive] = useState(
     parseInt(localStorage.getItem("active")) || 2
   );
-  const [userListNumber, setUserListNumber] = useState(2);
 
   const getAllUsers = async () => {
     try {
@@ -59,13 +58,38 @@ function Users() {
       <Table striped bordered hover variant="dark">
         <thead>
           <tr>
-            <th>#</th>
             <th>Name</th>
             <th>Email</th>
             <th>Website</th>
           </tr>
         </thead>
         <tbody>
+          <tr>
+            <td>
+              <input
+                type="text"
+                placeholder="Search"
+                className="form-control w-50 mx-auto text-center"
+                name="name"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                placeholder="Search"
+                className="form-control w-50 mx-auto text-center"
+                name="email"
+              />
+            </td>
+            <td>
+              <input
+                type="text"
+                placeholder="Search"
+                className="form-control w-50 mx-auto text-center"
+                name="website"
+              />
+            </td>
+          </tr>
           {users.map((user) => (
             <tr key={user.id}>
               <UserDetails key={user.id} user={user} />

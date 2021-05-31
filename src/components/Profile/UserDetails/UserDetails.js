@@ -5,7 +5,6 @@ function UserDetails({ user }) {
   const { id, name, email, website } = user;
   return (
     <>
-      <td>{id}</td>
       <td>
         <Link to={`/users/${id}`} className="text-info">
           {name}
