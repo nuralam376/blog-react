@@ -5,11 +5,13 @@ import { Button } from "react-bootstrap";
 import * as yup from "yup";
 import { UserContext } from "../../../App";
 
-function PostForm() {
+function PostForm({ post }) {
   const [userId] = useContext(UserContext);
+  console.log("post", post ? post.title : "");
+
   const initialvalues = {
-    title: "",
-    body: "",
+    title: post ? post.title : "",
+    body: post ? post.body : "",
   };
 
   const validationSchema = yup.object().shape({
@@ -21,7 +23,7 @@ function PostForm() {
     data.userId = userId;
     try {
       const response = await axios.post("/posts", data);
-      if (response.status === 201) alert("Post Created successfully");
+      if (response.status === 201) alert("Post information saved successfully");
       resetForm();
     } catch (err) {
       alert("Something went wrong");
@@ -33,6 +35,7 @@ function PostForm() {
       initialValues={initialvalues}
       validationSchema={validationSchema}
       onSubmit={onSubmit}
+      enableReinitialize
     >
       <Form>
         <label htmlFor="title">Post Title</label>
