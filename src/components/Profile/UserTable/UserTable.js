@@ -37,6 +37,8 @@ function UserTable(props) {
   }
 
   function getComparator(order, orderBy) {
+    order = localStorage.getItem(orderBy) || order;
+
     return order === "desc"
       ? (a, b) => descendingComparator(a, b, orderBy)
       : (a, b) => -descendingComparator(a, b, orderBy);
@@ -64,7 +66,8 @@ function UserTable(props) {
                 className="icon"
               >
                 {headCell.label}
-                {order === "asc" && orderBy === headCell.id ? (
+                {(order === "asc" && orderBy === headCell.id) ||
+                localStorage.getItem(headCell.id) === "asc" ? (
                   <ArrowUp />
                 ) : (
                   <ArrowDown />
