@@ -1,8 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Pagination, Table } from "react-bootstrap";
-import UserDetails from "../UserDetails/UserDetails";
-import HeadCell from "./HeadCell";
+import { Pagination } from "react-bootstrap";
+import UserTable from "../UserTable/UserTable";
 
 function Users() {
   const [allUsers, setAllUsers] = useState([]);
@@ -100,20 +99,7 @@ function Users() {
         onChange={(event) => searchUser(event.target.value)}
         defaultValue={localStorage.getItem("search")}
       />
-      <Table striped bordered hover variant="dark">
-        <thead>
-          <tr>
-            <HeadCell />
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user) => (
-            <tr key={user.id}>
-              <UserDetails key={user.id} user={user} />
-            </tr>
-          ))}
-        </tbody>
-      </Table>
+      <UserTable users={users} />
       {renderPagination()}
     </div>
   );
