@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Pagination, Table } from "react-bootstrap";
 import UserDetails from "../UserDetails/UserDetails";
+import HeadCell from "./HeadCell";
 
 function Users() {
   const [allUsers, setAllUsers] = useState([]);
@@ -102,9 +103,7 @@ function Users() {
       <Table striped bordered hover variant="dark">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Website</th>
+            <HeadCell />
           </tr>
         </thead>
         <tbody>

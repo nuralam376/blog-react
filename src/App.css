@@ -40,3 +40,8 @@
 .pagination {
   float: right;
 }
+
+.icon {
+  cursor: pointer;
+  color: white;
+}
