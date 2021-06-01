@@ -6,11 +6,11 @@ function CommentDetails({ comment }) {
   return (
     <div className="w-75 m-4 text-left">
       <h5>
-        <Person />
+        <Mailbox />
         {name}
       </h5>
       <h6>
-        <Mailbox />
+        <Person />
         {email}
       </h6>
       <p>
