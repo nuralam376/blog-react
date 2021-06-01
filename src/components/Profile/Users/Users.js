@@ -52,9 +52,53 @@ function Users() {
     getUsersPaginationData();
   }, [allUsers.length, active]);
 
+  useEffect(() => {
+    const searchText = localStorage.getItem("search");
+    if (searchText) {
+      const user = getSearchResult(searchText);
+      setUsers(user);
+    }
+  }, [allUsers.length]);
+
+  const getSearchResult = (searchText) => {
+    const user = allUsers
+      .filter((user) => {
+        let searchItem;
+        if (searchText === "") {
+          searchItem = "";
+        }
+        if (user.name.toLowerCase().includes(searchText.toLowerCase())) {
+          searchItem = user;
+        }
+        if (user.email.toLowerCase().includes(searchText.toLowerCase())) {
+          searchItem = user;
+        }
+        if (user.website.toLowerCase().includes(searchText.toLowerCase())) {
+          searchItem = user;
+        }
+        return searchItem;
+      })
+      .slice(0, active);
+    return user;
+  };
+
+  const searchUser = (searchText) => {
+    const user = getSearchResult(searchText);
+    localStorage.setItem("search", searchText);
+    setUsers(user);
+  };
+
   return (
     <div>
       <h1>Users</h1>
+      <input
+        type="text"
+        placeholder="Search"
+        className="form-control w-25 mx-auto text-center mb-3"
+        name="name"
+        onChange={(event) => searchUser(event.target.value)}
+        defaultValue={localStorage.getItem("search")}
+      />
       <Table striped bordered hover variant="dark">
         <thead>
           <tr>
@@ -64,32 +108,6 @@ function Users() {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              <input
-                type="text"
-                placeholder="Search"
-                className="form-control w-50 mx-auto text-center"
-                name="name"
-              />
-            </td>
-            <td>
-              <input
-                type="text"
-                placeholder="Search"
-                className="form-control w-50 mx-auto text-center"
-                name="email"
-              />
-            </td>
-            <td>
-              <input
-                type="text"
-                placeholder="Search"
-                className="form-control w-50 mx-auto text-center"
-                name="website"
-              />
-            </td>
-          </tr>
           {users.map((user) => (
             <tr key={user.id}>
               <UserDetails key={user.id} user={user} />
